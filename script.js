@@ -1,20 +1,75 @@
-// Mobile menu toggle (unchanged)
+// Mobile menu toggle
 const menuToggle = document.getElementById('menuToggle');
 const nav = document.getElementById('nav');
+const header = document.querySelector('.header');
 
 if (menuToggle && nav) {
   menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('open');
+    nav.classList.toggle('active');
     menuToggle.classList.toggle('active');
+    const isExpanded = nav.classList.contains('active');
+    menuToggle.setAttribute('aria-expanded', String(isExpanded));
   });
 
   nav.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      menuToggle.classList.remove('active');
+      if (window.innerWidth <= 640) {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 640) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
+
+// Header scroll state and active nav section
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const updateActiveSection = () => {
+  const scrollY = window.scrollY + 120;
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    const sectionId = section.getAttribute('id');
+
+    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
+      });
+    }
+  });
+};
+
+window.addEventListener('scroll', () => {
+  if (header) {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }
+  updateActiveSection();
+});
+
+updateActiveSection();
+
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+revealElements.forEach(element => revealObserver.observe(element));
 
 // Contact form handling (submits to Formspree)
 const contactForm = document.getElementById('contactForm');
