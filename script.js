@@ -17,11 +17,11 @@ if (menuToggle && nav) {
     });
 }
 
-// Contact form handling (demo - no backend)
+// Contact form handling with Formspree
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const name = document.getElementById('name').value.trim();
@@ -34,10 +34,31 @@ if (contactForm) {
             return;
         }
 
-        // Simulate successful submission
-        alert(`Thank you, ${name}! Your message has been received.\n\nWe'll contact you at ${email} within 1 business day regarding your ${service || 'inquiry'}.\n\n(This is a demo form — connect it to a real backend or form service to go live.)`);
+        try {
+            // Send data to Formspree
+            const response = await fetch('https://formspree.io/f/mbgrdyjl', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    service: service || 'inquiry',
+                    message: message
+                })
+            });
 
-        contactForm.reset();
+            if (response.ok) {
+                alert(`Thank you, ${name}! Your message has been received.\n\nWe'll contact you at ${email} within 1 business day regarding your ${service || 'inquiry'}.`);
+                contactForm.reset();
+            } else {
+                alert('There was an error sending your message. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('There was an error sending your message. Please try again.');
+        }
     });
 }
 
