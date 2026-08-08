@@ -371,6 +371,35 @@ ul {
 }
 
 /* ============================================
+   HERO IMAGE STYLING
+   ============================================ */
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    transition: all var(--transition);
+    object-fit: cover;
+}
+
+.hero-img:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-dark);
+    border-color: var(--primary);
+}
+
+/* ============================================
    SERVICES SECTION
    ============================================ */
 
@@ -597,6 +626,35 @@ ul {
     font-size: 0.9rem;
     color: var(--gray);
     margin-top: 0.25rem;
+}
+
+/* ============================================
+   ABOUT IMAGE STYLING
+   ============================================ */
+
+.about-image {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-img {
+    width: 100%;
+    height: auto;
+    max-width: 450px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    transition: all var(--transition);
+    object-fit: cover;
+}
+
+.about-img:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-dark);
+    border-color: var(--primary);
 }
 
 .about-card {
@@ -932,6 +990,12 @@ ul {
         margin: 0 auto;
     }
 
+    .about-image {
+        order: -1;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -956,6 +1020,11 @@ ul {
 
     .hero h1 {
         font-size: 2rem;
+    }
+
+    .hero-img,
+    .about-img {
+        max-width: 100%;
     }
 
     .services-grid {
@@ -1001,121 +1070,72 @@ ul {
         top: 70px;
         left: 0;
         right: 0;
-        background: var(--white);
         flex-direction: column;
-        padding: 1rem;
-        box-shadow: var(--shadow-lg);
+        background: var(--white);
+        padding: 1.5rem 0;
+        box-shadow: var(--shadow-md);
+        z-index: 999;
+        text-align: center;
         gap: 0;
-        border-bottom: 1px solid var(--gray-lighter);
     }
 
-    .nav.open {
+    .nav.active {
         display: flex;
     }
 
     .nav-link {
-        padding: 0.9rem 1rem;
-        border-bottom: 1px solid var(--gray-lighter);
-        color: var(--dark-soft);
-    }
-
-    .nav-link::after {
-        display: none;
+        padding: 0.75rem 0;
     }
 
     .menu-toggle {
         display: flex;
     }
 
-    .header-content {
-        height: 60px;
-    }
-
-    .hero {
-        padding: 100px 0 60px;
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .hero-buttons {
         flex-direction: column;
-        gap: 0.875rem;
+        gap: 1rem;
     }
 
     .hero-buttons .btn {
         width: 100%;
     }
 
-    .hero h1 {
-        font-size: 1.75rem;
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    .section-header h2 {
-        font-size: 1.5rem;
-    }
-
-    .service-card,
-    .about-card {
-        padding: 1.75rem;
+    .contact-content {
+        gap: 2rem;
     }
 
     .contact-form {
         padding: 2rem;
     }
 
-    .feature {
-        padding: 1.5rem;
-    }
-
-    .feature-icon {
-        font-size: 2.25rem;
-    }
-
-    .hero-stat {
-        flex-direction: column;
-        gap: 0.25rem;
-    }
-
-    .info-item {
-        flex-direction: column;
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
         text-align: center;
     }
 
-    .info-icon {
+    .footer-brand p {
         margin: 0 auto;
     }
-}
 
-@media (max-width: 480px) {
-    .container {
-        padding: 0 1rem;
-    }
-
-    .hero-content,
-    .about-content {
-        gap: 2rem;
+    .footer-links a,
+    .footer-links a:hover {
+        padding-left: 0;
     }
 
     .stats {
+        flex-direction: row;
+        justify-content: space-around;
         gap: 1.5rem;
-    }
-
-    .service-icon {
-        font-size: 2.25rem;
-    }
-
-    .feature-icon {
-        font-size: 2rem;
-    }
-
-    .logo {
-        font-size: 1.1rem;
-        gap: 0.5rem;
-    }
-
-    .nav {
-        top: 60px;
     }
 }
