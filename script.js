@@ -3,6 +3,61 @@ const menuToggle = document.getElementById('menuToggle');
 const nav = document.getElementById('nav');
 const header = document.querySelector('.header');
 
+const progressBar = document.createElement('div');
+progressBar.className = 'scroll-progress';
+document.body.appendChild(progressBar);
+
+const cursorGlow = document.createElement('div');
+cursorGlow.className = 'cursor-glow';
+document.body.appendChild(cursorGlow);
+
+const updateScrollProgress = () => {
+  const scrollTop = window.scrollY;
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  progressBar.style.width = `${Math.min(progress, 100)}%`;
+};
+
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+window.addEventListener('resize', updateScrollProgress);
+window.addEventListener('load', updateScrollProgress);
+
+window.addEventListener('pointermove', (event) => {
+  cursorGlow.style.opacity = '1';
+  cursorGlow.style.left = `${event.clientX}px`;
+  cursorGlow.style.top = `${event.clientY}px`;
+});
+
+window.addEventListener('pointerleave', () => {
+  cursorGlow.style.opacity = '0';
+});
+
+document.addEventListener('mouseleave', () => {
+  cursorGlow.style.opacity = '0';
+});
+
+document.addEventListener('mouseenter', () => {
+  cursorGlow.style.opacity = '1';
+});
+
+document.querySelectorAll('.service-card, .feature, .about-card, .contact-form').forEach((card) => {
+  card.addEventListener('mousemove', (event) => {
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const rotateY = ((x / rect.width) - 0.5) * 8;
+    const rotateX = ((0.5 - (y / rect.height))) * 8;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+    card.style.boxShadow = '0 22px 48px rgba(0, 0, 0, 0.16)';
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});
+
 if (menuToggle && nav) {
   menuToggle.addEventListener('click', () => {
     nav.classList.toggle('active');
