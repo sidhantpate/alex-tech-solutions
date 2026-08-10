@@ -22,22 +22,39 @@ window.addEventListener('scroll', updateScrollProgress, { passive: true });
 window.addEventListener('resize', updateScrollProgress);
 window.addEventListener('load', updateScrollProgress);
 
+let pointerX = 0;
+let pointerY = 0;
+let pointerVisible = false;
+let rafScheduled = false;
+
 window.addEventListener('pointermove', (event) => {
-  cursorGlow.style.opacity = '1';
-  cursorGlow.style.left = `${event.clientX}px`;
-  cursorGlow.style.top = `${event.clientY}px`;
+  pointerX = event.clientX;
+  pointerY = event.clientY;
+  pointerVisible = true;
+  if (!rafScheduled) {
+    rafScheduled = true;
+    requestAnimationFrame(() => {
+      cursorGlow.style.opacity = '1';
+      cursorGlow.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
+      rafScheduled = false;
+    });
+  }
 });
 
 window.addEventListener('pointerleave', () => {
+  pointerVisible = false;
   cursorGlow.style.opacity = '0';
 });
 
 document.addEventListener('mouseleave', () => {
+  pointerVisible = false;
   cursorGlow.style.opacity = '0';
 });
 
 document.addEventListener('mouseenter', () => {
-  cursorGlow.style.opacity = '1';
+  if (pointerVisible) {
+    cursorGlow.style.opacity = '1';
+  }
 });
 
 document.querySelectorAll('.service-card, .feature, .about-card, .contact-form').forEach((card) => {
