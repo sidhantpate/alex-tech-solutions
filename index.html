@@ -28,6 +28,7 @@
                 <a href="#why-us" class="nav-link">Why Us</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
+            <a href="#contact" class="btn btn-primary header-cta">Book Repair</a>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
@@ -288,6 +289,21 @@
         </div>
     </footer>
 
+    <div id="messageToast" class="toast toast-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="orderConfirmOverlay" class="order-overlay order-hidden" aria-live="polite" aria-label="Message sent confirmation">
+        <div class="order-card">
+            <img src="laptoplogo2.jpg" alt="Alex Tech Solutions logo" class="order-logo">
+            <div class="order-track">
+                <div class="order-slider"></div>
+                <div class="order-pill"></div>
+            </div>
+            <div class="order-text">
+                <span class="default">Sending your message...</span>
+                <span class="success"><svg viewBox="0 0 12 10" aria-hidden="true"><path d="M1 5.2L4.5 8.7 11 1.2"></path></svg> Message sent successfully</span>
+            </div>
+            <button type="button" class="btn btn-secondary order-close" id="orderConfirmClose">Got it</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
