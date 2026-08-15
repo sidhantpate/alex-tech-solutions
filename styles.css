@@ -1442,6 +1442,36 @@ ul {
     color: var(--gray-light);
 }
 
+.footer-bottom p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.footer-credit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--white);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 24px rgba(0, 102, 255, 0.28);
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+}
+
+.footer-credit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0, 102, 255, 0.34);
+    filter: brightness(1.05);
+    color: var(--white);
+}
+
 /* ============================================
    CREATIVE ANIMATIONS & EFFECTS
    ============================================ */
