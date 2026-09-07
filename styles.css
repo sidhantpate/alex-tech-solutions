@@ -550,6 +550,28 @@ ul {
     box-shadow: 0 12px 24px rgba(0, 102, 255, 0.16);
 }
 
+.btn-app-download {
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--dark);
+    border: 1px solid rgba(0, 102, 255, 0.22);
+    box-shadow: var(--shadow);
+}
+
+.btn-app-download:hover {
+    background: var(--white);
+    color: var(--primary-dark);
+    border-color: var(--primary-light);
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: var(--shadow-md);
+}
+
+.app-download-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
 .btn-outline {
     background: transparent;
     color: var(--dark);
