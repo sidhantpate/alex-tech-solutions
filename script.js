@@ -5,6 +5,21 @@ const header = document.querySelector('.header');
 
 let deferredInstallPrompt;
 const installButtons = document.querySelectorAll('.pwa-install-button');
+const appDownloadOverlay = document.getElementById('appDownloadOverlay');
+const appDownloadClose = document.getElementById('appDownloadClose');
+const installAppChoice = document.getElementById('installAppChoice');
+
+const hideAppDownloadOptions = () => {
+  if (!appDownloadOverlay) return;
+  appDownloadOverlay.classList.remove('app-download-visible');
+  appDownloadOverlay.classList.add('app-download-hidden');
+};
+
+const showAppDownloadOptions = () => {
+  if (!appDownloadOverlay) return;
+  appDownloadOverlay.classList.remove('app-download-hidden');
+  appDownloadOverlay.classList.add('app-download-visible');
+};
 
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
@@ -12,23 +27,42 @@ window.addEventListener('beforeinstallprompt', (event) => {
   installButtons.forEach((button) => {
     button.hidden = false;
   });
+  if (installAppChoice) installAppChoice.hidden = false;
 });
 
 installButtons.forEach((button) => {
-  button.addEventListener('click', async () => {
+  button.addEventListener('click', showAppDownloadOptions);
+});
+
+if (installAppChoice) {
+  installAppChoice.hidden = true;
+  installAppChoice.addEventListener('click', async () => {
     if (!deferredInstallPrompt) return;
 
     deferredInstallPrompt.prompt();
     await deferredInstallPrompt.userChoice;
     deferredInstallPrompt = null;
+    hideAppDownloadOptions();
     installButtons.forEach((installButton) => {
       installButton.hidden = true;
     });
   });
-});
+}
+
+if (appDownloadClose) {
+  appDownloadClose.addEventListener('click', hideAppDownloadOptions);
+}
+
+if (appDownloadOverlay) {
+  appDownloadOverlay.addEventListener('click', (event) => {
+    if (event.target === appDownloadOverlay) hideAppDownloadOptions();
+  });
+}
 
 window.addEventListener('appinstalled', () => {
   deferredInstallPrompt = null;
+  hideAppDownloadOptions();
+  if (installAppChoice) installAppChoice.hidden = true;
   installButtons.forEach((button) => {
     button.hidden = true;
   });
