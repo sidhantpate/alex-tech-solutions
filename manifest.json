@@ -1,0 +1,20 @@
+{
+  "name": "Alex Tech Solutions",
+  "short_name": "Alex Tech",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b74de",
+  "icons": [
+    {
+      "src": "laptoplogo2.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "laptoplogo2.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
