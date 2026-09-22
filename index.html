@@ -296,6 +296,30 @@
     </footer>
 
     <div id="messageToast" class="toast toast-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="appDownloadOverlay" class="app-download-overlay app-download-hidden" role="dialog" aria-modal="true" aria-labelledby="appDownloadTitle">
+        <div class="app-download-card">
+            <button type="button" class="app-download-close" id="appDownloadClose" aria-label="Close download options">&times;</button>
+            <img src="laptoplogo2.jpg" alt="Alex Tech Solutions logo" class="app-download-modal-logo">
+            <h2 id="appDownloadTitle">Download Alex Tech Solutions</h2>
+            <p>Choose how you would like to use our app.</p>
+            <div class="app-download-options">
+                <a href="alextech.apk" class="app-download-option" download="Alex-Tech-Solutions.apk">
+                    <span class="app-download-option-icon">APK</span>
+                    <span>
+                        <strong>Download APK</strong>
+                        <small>Install the Android app file</small>
+                    </span>
+                </a>
+                <button type="button" class="app-download-option pwa-install-choice" id="installAppChoice">
+                    <span class="app-download-option-icon">WEB</span>
+                    <span>
+                        <strong>Add to Home Screen</strong>
+                        <small>Install alextechsolutions.sidhantpatel.com.np</small>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
     <div id="orderConfirmOverlay" class="order-overlay order-hidden" aria-live="polite" aria-label="Message sent confirmation">
         <div class="order-card">
             <img src="laptoplogo2.jpg" alt="Alex Tech Solutions logo" class="order-logo">
