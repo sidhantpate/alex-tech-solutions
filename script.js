@@ -3,6 +3,43 @@ const menuToggle = document.getElementById('menuToggle');
 const nav = document.getElementById('nav');
 const header = document.querySelector('.header');
 
+let deferredInstallPrompt;
+const installButtons = document.querySelectorAll('.pwa-install-button');
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  installButtons.forEach((button) => {
+    button.hidden = false;
+  });
+});
+
+installButtons.forEach((button) => {
+  button.addEventListener('click', async () => {
+    if (!deferredInstallPrompt) return;
+
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installButtons.forEach((installButton) => {
+      installButton.hidden = true;
+    });
+  });
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  installButtons.forEach((button) => {
+    button.hidden = true;
+  });
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js');
+  });
+}
+
 const progressBar = document.createElement('div');
 progressBar.className = 'scroll-progress';
 document.body.appendChild(progressBar);
