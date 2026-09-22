@@ -8,6 +8,7 @@
     <link rel="icon" href="laptoplogo2.jpg" type="image/png">
     <link rel="apple-touch-icon" href="laptoplogo2.jpg">
     <meta name="theme-color" content="#0b74de">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,10 +50,10 @@
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">Book Repair</a>
                     <a href="#services" class="btn btn-secondary">Repair Services</a>
-                    <a href="alextech.apk" class="btn btn-app-download" download="Alex-Tech-Solutions.apk" aria-label="Download the Alex Tech Solutions app">
+                    <button type="button" class="btn btn-app-download pwa-install-button" id="installAppButton" hidden aria-label="Install the Alex Tech Solutions app">
                         <img src="laptoplogo2.jpg" alt="" class="app-download-logo">
                         <span>Download App</span>
-                    </a>
+                    </button>
                 </div>
             </div>
             <div class="hero-image reveal">
@@ -269,7 +270,7 @@
                 <a href="#services">Services</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
-                    <a href="alextech.apk" download="Alex-Tech-Solutions.apk">Download App</a>
+                    <button type="button" class="pwa-install-button" id="installAppFooterButton" hidden>Download App</button>
             </div>
             <div class="footer-contact">
                 <h4>Contact</h4>
