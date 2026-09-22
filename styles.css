@@ -1418,7 +1418,20 @@ ul {
     color: var(--gray-light);
 }
 
-.footer-links a:hover {
+.footer-links .pwa-install-button {
+    display: block;
+    padding: 0;
+    margin: 0 0 0.75rem;
+    background: none;
+    border: none;
+    color: var(--gray-light);
+    font: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.footer-links a:hover,
+.footer-links .pwa-install-button:hover {
     color: var(--accent);
     padding-left: 0.5rem;
 }
